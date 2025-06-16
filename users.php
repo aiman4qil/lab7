@@ -1,3 +1,19 @@
+<?php
+// Database config (MUST MATCH register.php)
+define('DB_HOST', 'localhost');
+define('DB_USER', 'root');
+define('DB_PASS', '');
+define('DB_NAME', 'lab_7');
+
+$conn = new mysqli(DB_HOST, DB_USER, DB_PASS, DB_NAME);
+
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+}
+
+$sql = "SELECT matric, name, role FROM users";
+$result = $conn->query($sql);
+?>
 
 <!DOCTYPE html>
 <html>
@@ -5,30 +21,28 @@
     <title>User List</title>
     <style>
         body { font-family: Arial, sans-serif; margin: 20px; }
-        table { border-collapse: collapse; width: 100%; }
+        table { width: 100%; border-collapse: collapse; }
         th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }
         th { background-color: #f2f2f2; }
         tr:nth-child(even) { background-color: #f9f9f9; }
     </style>
 </head>
 <body>
-    <h1>Faculty of Computer Science and Information Technology</h1>
-    <h2>BIT21503 Web Development</h2>
-    <h3>User List</h3>
-    
+    <h2>Registered Users</h2>
     <table>
         <tr>
             <th>Matric</th>
             <th>Name</th>
-            <th>Level</th>
+            <th>Role</th>
         </tr>
-        <?php while ($row = $result->fetch_assoc()): ?>
+        <?php while($row = $result->fetch_assoc()): ?>
         <tr>
-            <td><?php echo htmlspecialchars($row['matric']); ?></td>
-            <td><?php echo htmlspecialchars($row['name']); ?></td>
-            <td><?php echo htmlspecialchars($row['role']); ?></td>
+            <td><?= htmlspecialchars($row['matric']) ?></td>
+            <td><?= htmlspecialchars($row['name']) ?></td>
+            <td><?= ucfirst(htmlspecialchars($row['role'])) ?></td>
         </tr>
         <?php endwhile; ?>
     </table>
+    <p><a href="register.php">Back to Registration</a></p>
 </body>
 </html>
