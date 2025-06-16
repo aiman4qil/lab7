@@ -1,28 +1,5 @@
-<?php
-// Database connection
-$conn = new mysqli('localhost', 'username', 'password', 'lab_7');
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-}
 
-// Handle form submission
-if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    $matric = $_POST['matric'];
-    $name = $_POST['name'];
-    $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
-    $role = $_POST['role'];
-    
-    $stmt = $conn->prepare("INSERT INTO users (matric, name, password, role) VALUES (?, ?, ?, ?)");
-    $stmt->bind_param("ssss", $matric, $name, $password, $role);
-    
-    if ($stmt->execute()) {
-        $success = "Registration successful!";
-    } else {
-        $error = "Error: " . $conn->error;
-    }
-    $stmt->close();
-}
-?>
+
 
 <!DOCTYPE html>
 <html>
