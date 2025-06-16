@@ -1,13 +1,3 @@
-<?php
-// Database connection
-$conn = new mysqli('localhost', 'username', 'password', 'lab_7');
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-}
-
-// Fetch users
-$result = $conn->query("SELECT matric, name, role FROM users");
-?>
 
 <!DOCTYPE html>
 <html>
