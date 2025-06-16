@@ -22,7 +22,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     $sql = "INSERT INTO users (matric, name, password, role) VALUES ('$matric', '$name', '$password', '$role')";
     
-    if ($conn->query($sql) {
+    if ($conn->query($sql)) {
         $message = "Registration successful!";
     } else {
         $error = "Error: " . $conn->error;
