@@ -23,6 +23,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $sql = "INSERT INTO users (matric, name, password, role) VALUES ('$matric', '$name', '$password', '$role')";
     
     if ($conn->query($sql)) {
+        header("location: users.php");
         $message = "Registration successful!";
     } else {
         $error = "Error: " . $conn->error;
